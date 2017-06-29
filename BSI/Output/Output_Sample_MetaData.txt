@@ -1,0 +1,6 @@
+Effective Sample Size = 1
+ 
+#Number_of_sources Probability 
+ 
+0 0.0
+1 1.0

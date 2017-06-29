@@ -1,0 +1,4 @@
+#Sample_ID Number_of_Sources X Y Flux Alpha Flux_Integ Posterior 
+ 
+0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+1 1.0 -0.377013 0.629509 1.7341 3.6775 0.0 1.0
