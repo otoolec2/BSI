@@ -12,18 +12,16 @@ yc = np.loadtxt('Output/Output_Sample_Data.txt', usecols = ((3,)), skiprows = 3)
 f = np.loadtxt('Output/Output_Sample_Data.txt', usecols = ((4,)), skiprows = 3)
 a = np.loadtxt('Output/Output_Sample_Data.txt', usecols = ((5,)), skiprows = 3)
 
-samples = []
+uniq_samples = []
 SAMPLE = []
 X = []
 Y = []
 F = []
 A = []
 
-# samples is used to investigate the number of samples contining a source within this box. 
-# If this is the same as the total effective sample size, we can be extremely confident a source is in this region
 for i in range(len(xc)):
-	if sample[i] not in samples:
-		samples.append(sample[i])
+	if sample[i] not in uniq_samples:
+		uniq_samples.append(sample[i])
 	if xc[i] >= 642 and xc[i] <= 644 and yc[i] >= 629 and yc[i] <= 631:
 		SAMPLE.append(i)
 		X.append(xc[i])
@@ -31,14 +29,18 @@ for i in range(len(xc)):
 		F.append(f[i])
 		A.append(a[i])
 
-#print len(samples)
-#print len(X), len(xc)
-		
+print "Percentage of samples containing such a source. If greater than 100, likely some samples produced multiple sources within this box." 
+print (float(len(X))/float(len(uniq_samples)))*100.
+print " "
+sys.stdout.flush()
+
+
 X_avg = sum(X)/len(X)
 Y_avg = sum(Y)/len(Y)
 F_avg = sum(F)/len(F)
 A_avg = sum(A)/len(A)
 
+print "Average coordinate position."
 print X_avg, Y_avg
 print " "
 sys.stdout.flush()
@@ -53,6 +55,7 @@ for i in range(len(X)):
 X_stddev = X_stddev**0.5
 Y_stddev = Y_stddev**0.5
 
+print "Standard deviation of x and y coordinates, respectively."
 print X_stddev, Y_stddev
 print " "
 sys.stdout.flush()
@@ -66,8 +69,10 @@ for i in range(len(X)):
 F_stddev = F_stddev**0.5
 A_stddev = A_stddev**0.5
 
+print "Average and standard deviation of flux."
 print F_avg, F_stddev 
 print " "
+print "Average and standard deviation of alpha."
 print A_avg, A_stddev
 print " "
 sys.stdout.flush()
