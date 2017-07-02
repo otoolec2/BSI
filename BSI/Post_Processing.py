@@ -500,20 +500,19 @@ print ">>>>Done."
 print " "
 sys.stdout.flush()
 
-# Sum probabilities of samples with the same number of sources. The case with zero sources has already been done.
-# The jth entry will  contain the total probability of j sources being present
+# Calculate the proportion of samples in the effective sample which contain a given number of sources
+
 NMAX = int(max(num))
 
-Prob = [0. for k in range(int(NMAX) + 1)]
-Prob[0] = prob[0] 
+Proportion = [0. for k in range(int(NMAX) + 1)]
 
 for i in range(1, len(sample)):
 	
-	for j in range(1, len(Prob)):
+	for j in range(1, len(Proportion)):
 	
 		if int(num[i]) == j:
 		
-			Prob[j] += prob[i]/float(j) # Division accounts for repeats from the same sample
+			Proportion[j] += (1./len(sample))*100. # Division accounts for repeats from the same sample
 
 
 
@@ -612,11 +611,11 @@ sys.stdout.flush()
 
 sample_metadata = open(output_header + 'Output_Sample_MetaData.txt', 'w')
 sample_metadata.write("Effective Sample Size = " + str(len(number)) + "\n \n")
-sample_metadata.write("#Number_of_sources Probability \n \n")
+sample_metadata.write("#Number_of_sources Percentage_of_samples_containing_this_many_sources \n \n")
 
-for j in range(len(Prob)):
+for j in range(len(Proportion)):
 
-	sample_metadata.write( str(j) + " " + str(Prob[j]) + "\n")
+	sample_metadata.write( str(j) + " " + str(Proportion[j]) + "%" + "\n")
 
 sample_metadata.close()
 print ">>>>Done."
